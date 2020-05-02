@@ -31,7 +31,7 @@ Since Android 7 (API level 24), secure connections from apps won't trust user-ad
 2. Add `res/xml/network_security_config`, which enables app trusts user-added CA
 
 3. Modify `AndroidManifest.xml` to apply network configurations from `res/xml/network_security_config.xml`
--
+
 4. Build apk with the changes above
 
 5. Generate a new keystore
