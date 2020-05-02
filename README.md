@@ -22,7 +22,7 @@ Options:
 
 ## Why this script is needed?
 
-Since Android 7 (API level 24), secure connections from apps won't trust user-added CA store by default. It means, in many cases, simply adding proxy CA on the device won't be enough to intercept HTTPS requests from proxy tool. In additional, some network security configurations are required to be added in app source code, in order to enable the trust of user-added proxy CA store. This script automates the process to add these additional network configurations and recompile apk, ready for MITM.
+Since Android 7 (API level 24), secure connections from apps won't trust user-added CA store by default. It means, in many cases, simply adding proxy CA on the device won't be enough to intercept HTTPS requests from proxy tool. In addition, some network security configurations are required to be added in app source code, in order to enable the trust of user-added proxy CA store. This script automates the process to add these additional network configurations and then recompile target apk, ready for MITM.
 
 ## What this script does exactly?
 
