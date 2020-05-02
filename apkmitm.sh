@@ -31,6 +31,7 @@ set_var() {
     _STORE_PASSWORD="passwo"
     _KEY_PASSWORD="passwo"
     _APK_PREFIX="prepared-"
+    _OUTPUT_APK_NAME="${_APK_PREFIX}${_APK// /_}"
 }
 
 set_args() {
@@ -126,11 +127,11 @@ main() {
     set_var
 
     decompile_apk "$_APK" "$_OUTPUT_DIR"
-    modify_manifest "$_MANIFEST_XML"
     add_network_config "$_OUTPUT_DIR"
+    modify_manifest "$_MANIFEST_XML"
+    build_apk "$_OUTPUT_APK_NAME" "$_OUTPUT_DIR"
     generate_keystore
-    build_apk "${_APK_PREFIX}${_APK// /_}" "$_OUTPUT_DIR"
-    sign_apk "${_APK_PREFIX}${_APK// /_}"
+    sign_apk "$_OUTPUT_APK_NAME"
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
