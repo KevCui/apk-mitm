@@ -77,14 +77,30 @@ decompile_apk() {
 
 modify_manifest() {
     # $1: AndroidManifest.xml file
+    local f
+    f=$(mktemp)
     [[ ! -f "$1" ]] && print_error "$1 not found!"
+
     if grep -q "networkSecurityConfig" "$1"; then
         print_info "$1 has already been modified! No change."
     else
-        print_info "Modifying ${1}..."
-        cp "$1" "${1}.orig"
-        sed -E "/<application/a\\
-android\:networkSecurityConfig=\"@xml\/network_security_config\"" < "${1}.orig" > "$1"
+        print_info "Adding networkSecurityConfig in ${1}..."
+        cp "$1" "$f"
+        sed -E 's/<application/<application android:networkSecurityConfig="@xml\/network_security_config"/' < "$f"  > "$1"
+    fi
+
+    if grep -q '"android:debuggable="false"' "$1"; then
+        print_info "Changing ${1} debuggable to true..."
+        cp "$1" "$f"
+        sed -E 's/android:debuggable="false"/android:debuggable="true"/' < "$f"  > "$1"
+    fi
+
+    if grep -q '"android:debuggable="true"' "$1"; then
+        print_info "$1 has already been debuggable! No change."
+    else
+        print_info "Making ${1} debuggable..."
+        cp "$1" "$f"
+        sed -E 's/<application/<application android:debuggable="true"/' < "$f"  > "$1"
     fi
 }
 
