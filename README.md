@@ -37,3 +37,7 @@ Since Android 7 (API level 24), secure connections from apps won't trust user-ad
 5. Generate a new keystore
 
 6. Sign apk with self-signed keystore
+
+---
+
+<a href="https://www.buymeacoffee.com/kevcui" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-orange.png" alt="Buy Me A Coffee" height="60px" width="217px"></a>
